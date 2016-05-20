@@ -65,3 +65,7 @@ A MAN ONCE ENTERED TEN PUNS IN A CONTEST TO SEE WHICH WOULD WIN, UNFORTUNATELY, 
 ## Funny Note by Jake Redmond
 
 IMAGINE DRAGONS HAS BEEN ACTIVE ON THE RADIO A LOT LATELY, I GUESS YOU COULD SAY THEY'RE RADIO ACTIVE
+
+### Funny Note by AlexanderClayBeard
+
+A blonde replica of Professor Smith's hair is currently selling on ebay for 1024 bit coins
