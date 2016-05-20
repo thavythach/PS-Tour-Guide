@@ -61,3 +61,7 @@ THE DREAM IS MARS, THE GOAL IS WORLD DOMINATION.
 ### Funny Note by Jesse Kuras
 
 A MAN ONCE ENTERED TEN PUNS IN A CONTEST TO SEE WHICH WOULD WIN, UNFORTUNATELY, NO PUN IN TEN DID.
+
+### Funny Note by AlexanderClayBeard
+
+A blonde replica of Professor Smith's hair is currently selling on ebay for 1024 bit coins
