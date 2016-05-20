@@ -8,7 +8,7 @@ A tour guide application.
 
 * Thavy Thach [Lead Programmer]
 * Jesse Kuras [Lead Programmer/the sketch]
-* (place holder) [Lead Programmer]
+* Jake Redmond [Lead Programmer]
 * (place holder) [Lead Programmer]
 
 ### May Goals
@@ -61,3 +61,7 @@ THE DREAM IS MARS, THE GOAL IS WORLD DOMINATION.
 ### Funny Note by Jesse Kuras
 
 A MAN ONCE ENTERED TEN PUNS IN A CONTEST TO SEE WHICH WOULD WIN, UNFORTUNATELY, NO PUN IN TEN DID.
+
+## Funny Note by Jake Redmond
+
+IMAGINE DRAGONS HAS BEEN ACTIVE ON THE RADIO A LOT LATELY, I GUESS YOU COULD SAY THEY'RE RADIO ACTIVE
