@@ -8,7 +8,7 @@ A tour guide application.
 
 * Thavy Thach [Lead Programmer]
 * Jesse Kuras [Lead Programmer/the sketch]
-* (place holder) [Lead Programmer]
+* Alexander Harris [Lead Programmer]
 * (place holder) [Lead Programmer]
 
 ### May Goals
