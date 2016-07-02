@@ -1,0 +1,9 @@
+Milestone to reach: "GOOGLE MAPS API"
+
+LINK: https://developers.google.com/maps/documentation/android-api/start
+GOAL: get setup and familiar with this API and play around with it. 
+ATTACH: "FIRSTNAME_MILESTONE_#1" (code and how to use)
+DUE: AFTER YOU'RE FAMILIAR WITH IT
+RESPOND: tourguideneedsaname2016 + comments/concerns
+
+add-on to milestone 2: in what WAYS can we implement google maps api into the tour guide? Are there alternatives to this api? If so, please list. Can we use other APIs with google maps API? If so, list them
