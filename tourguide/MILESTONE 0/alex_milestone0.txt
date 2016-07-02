@@ -1,0 +1,27 @@
+@author Alex Harris
+
+[1]What is the purpose of this application?
+The purpose of the application is to provide navigational, event-related, and historical information about the University of Puget Sound to both campus frequenters and visitors alike.
+
+[2]What does the application actually allow you to do?
+The application allows the user to easily access school information through their Android device.
+
+[3]With a list of what the application actually does, break components down into a concrete outline of how the user will get to point A to point B or point A to point C, where these points = a list of what the application actually does.
+TBD
+
+[4]Number 3 was a loaded question so what does the user see when he/she opens the app?
+When first opening the app, the user will see a navigable map of the school.
+
+[5]Follow up for #4, what are they able to do on that first screen?
+The user is able to open a sidebar menu containing a list of sites/buildings on the campus. Each of these list (menu) items may be a link containing the LatLng object information and could link to a pin at that location on the map.
+
+[6]Do we want to work with landscape or portrait orientation? or maybe both?
+Start with portrait.
+
+[7]What do you want to see in this app?
+I want to see usefulness for all users - from the visitor to the students!
+
+[8]what are the pages we want in this app?
+Calendar events, maybe parse the pugetsound.edu calendar events .html text page. http://www.pugetsound.edu/news-and-events/events-calendar/academic/2016-08-01/2017-08-31/
+
+A menu containing links that navigate to a specific place on the map. For example, if we have an array of LatLng objects that also act as links to campus sites: menu[LatLng jonesHall, LatLng wheelock, LatLng thompsonHall]; the user may select a campus site from the menu and be navigated to a pin on the map associated with that sites latitude and longitude. 

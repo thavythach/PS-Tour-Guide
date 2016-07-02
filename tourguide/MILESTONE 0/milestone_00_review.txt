@@ -1,0 +1,182 @@
+MILESTONE #0
+
+===================
+[1] PURPOSE OF THIS APPLICATION
+===================
+-PROVIDE RELEVANT INFORMATION TO BOTH UPS VISITORS AND STUDENTS IN A STREAMLINED AND EFFICIENT MANNER 
+# what is faculty 
+# ok
+
+-PROVIDE NAVIGATION, EVENT-RELATED, AND HISTORICAL INFORMATION ABOUT THE UNIVERSITY OF PUGET SOUND TO BOTH CAMPUS FREQUENTERS AND VISITORS ALIKE.
+# good 
+
+-PROVIDE EASY ACCESS THE UNIVERSITY
+# uh ok
+
+# review 
+# decent purpose -> needs edits + more effort in description
+
+# key words; provide, visitors, students, navigation, events, historial information, university of puget sound, campus, access, easy 
+
+===================
+[2] Features
+===================
+-allows the user to easily access school information through their Android device.
+# KEY POINTS: ANDROID and ACCESS TO SCHOOL INFORMATION
+
+-Learn about/Navigate around campus
+-Contact Red Dot in case of a sticky situation
+-See meal menus and nearby food venues, parks, museums, etc
+-Connect with other similar majors to study with outside of the learning center
+# KEY POINTS: LEARN/NAVIGATE AROUND CAMPUS, RED DOT, NEARBY, STUDY 
+
+-Access a map of campus and the surrounding area
+-Find detailed information that is otherwise inaccessible or rare 
+	(i.e. building history, a directions map specific to campus)
+-Find restaurants and activities in the nearby community worth mentioning 
+	(perhaps categorized by: food, activities, music, religious, etc.)
+# KEY POINTS: ACCESS A MAP, FIND INFORMATION, RESTAURANTS, ACTIVITIES,
+
+# review
+# keywords; android, navigate, campus, red dot, meal, menu, nearby, connect, majors, learning, map, access, restaurants, activities, community
+
+
+===================
+[3-4-5] Point A to point B to point c 
+===================
+-Load screen -> map of ups campus (birds eye view)
+# birds eye view? okay what about satellite view? also preference can be set in settings somewhere instead of just setting a forced one on the user 
+# possibly a prompt for first time use
+-map zoom -> specific landmarks selected for more information
+# markers are for sure to be a feature
+-locations/directions can be searched on Google Maps
+# google maps api will surely be used, however, other APIs will be on research queue
+-top left button -> menu links to other pages [core of navigation]
+# not a bad idea, but a swiping left for a full menu of links is much better 
+# great aesthetic idea - android has a lot of features that we don't know about so this is good!
+
+-load screen -> map of ups campus with a menu
+-menu -> locations 
+# menu by swipe on the left is possible 
+# menu also in the middle of the map
+1 setting -> open a sidebar containing a list of sites/buildings on the campus 
+	list -> link containing the LatLng object information and could link to a pin at the location on the map 
+	# great great stuff, but.... possibly keep all of the lat and lng in a database. and grabbing all of that data by querying would be BEST case scenario. we can filter as we want as well - very efficient.
+
+-load screen -> 6 items
+	maps, 
+		1 view -> full screen interactive map # yes
+		2 settings -> red dot and home # yes, possibly instead of "home" a logo
+		1 setting -> get directions # yes, but needs discussion
+			get direction, 
+				2 inputs -> start, finish # discussion needed
+				1 view -> small map # i liked this, but of course we need discussion
+	meals, (on click -> full screen)
+		4 settings -> sub menu, cellar menu, opp menu, div menu # great idea
+		2 settings -> red dot and home # yes, possibly instead of "home" a logo
+	study, 
+		4 settings -> offers, ask, refine, shows own posts to see replies 
+			offers,
+				inputs -> location, subject, etc. # offers/ask discussion is needed, but overall great concept
+				2 settings -> refine, shows own post to see replies # discussion
+			live feed,
+				on click of individual post ->  two views # i love this concept
+					one view -> reply # yas
+					one view -> read # yas
+				2 setings -> refine, shows own post to see replies # discussion
+		1 view -> live feed of offers/asks for all subjects # yas # discussion
+	events, (nearby)
+		3 tabs (day, week, month) # discussion and optimizations can be extended
+		2 settings -> red dot and home # yes, possible instead of "home" a logo
+	red dot, (automated by using name + location)
+		2 settings -> call now and file report button using email # email im not sure is possible # but love the idea
+		2 settings -> red dot and home
+		CONSTANT -> on every screen # dig it
+	settings, (on click -> full screen)
+		4 settings -> visual, red dot, personal, app info # refinement and discussion
+		2 settings -> red dot and home 
+		CONSTANT -> on every screen # possible logo instead of a "home"
+# freaken stellar design and effort 
+# first screen is gucci, but possible design should be discussed/mapped again b/c we have to keep the user in mind in how they use it.
+
+#overall review
+# great start - skeleton seems pretty good to know where we want to start
+# Implementing maps with a bunch of puget sound campus latitudes will be ideal first
+# implementing a loading screen with a map and a logo will be good as well. 
+
+===================
+[6] Orientation 
+===================
+- portrait or both
+
+- start with portrait
+
+- both 
+
+# portrait first
+# landscape when we want to be crazy
+
+===================
+[7] What do you want to see in this app?
+===================
+- usefullness for all users - from the visitors to the students
+
+- smooth, simple functionality, and no clunky-ness
+
+- information presented in a way that avoids the hassle of school websites and demonstrably assists users in daily functions on campus
+
+# just know we don't want to memory leak because that happens often i hear with android LOL gg no re
+
+===================
+[8] What are the page we want in this app? 
+===================
+- important: maps page, news page, events page
+- extensions: meals page, major progress, active tutors w/ locations 
+
+- parsing UPS events from academic/events calendar # ALL FOR THIS # LITERALLY
+- menu containing links that navigate to a specific place on the map 
+	-Example: array of latlng objects as links to campus sites
+
+# OTHER STUFF:
+# to dos from my.pugetsound.edu
+# finals schedule for locations, etc.
+# clubs available on the puge # easily accessible sign up to their mailing list
+# washington events 
+# array of latlng = lets translate that to querying from a database # look in the book ch. 14 i think will give you an intro to it
+# any posters created - events are posted from that
+# services offered 
+# historical information
+# so many things.....
+# IOS implementation after android
+# html 5 implementation [browser cross-platform]
+
+===================
+[9] what exactly are we trying to do?
+===================
+- improve the experience of students at UPS using 21st century technology
+# 21st century technology is pushing it LOL, we aren't even halfway there yet haha
+- learn android development through a highly practicaly and applied sense
+# yas basically
+
+- open UPS campus to visitors while simulanteously making information about the local community more accessible to students, hopefully creating a more integrated environment in terms of school-and-town interaction
+# yas good job
+- providng potential new students with greater information than is alreay available (such as pictures of dorm rooms, for example, may encourage a higher enrollment rate and improve the prospects of UPS in the future)
+# yaaaaaaas
+
+===================
+[10] Mission Statement 
+===================
+uh help me out dood like srsly or fight meeee m8
+# yeah we don't really need this, but it'd be cool if we knew what the heck we're doing
+
+===================
+[11] Your questions/comments  
+===================
+-AUDIENCE: USER
+# whooooooooooooooooooooooooooooooooooooo
+-BETA TEST FEATURES: FAMILY [WHO KNOWS TECHNOLOGY] 
+# family tho, also friends too, and your professors
+-How will this app be supported in the long-term? 
+# Director of Technology Services / ACM local chapter continunity plan 
+# figure out trusted posts vs untrusted posts
+# "business" if we want to publish this app officially. 

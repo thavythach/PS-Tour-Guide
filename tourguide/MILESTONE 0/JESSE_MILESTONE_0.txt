@@ -1,0 +1,27 @@
+
+[1]What is the purpose of this application?
+To provide easy access to the University 
+[2]What does the application actually allow you to do?
+Learn about/Navigate around campus
+Contact Red Dot in case of a sticky situation
+See meal menus and nearby food venues, parks, museums, etc
+Connect with other similar majors to study with outside of the learning center 
+[3]With a list of what the application actually does, break components down into a concrete outline of how the user will get to point A to point B or point A to point C, where these points = a list of what the application actually does.
+[4]Number 3 was a loaded question so what does the user see when he/she opens the app?
+[5]Follow up for #4, what are they able to do on that first screen?
+For 3-5 see visual layout of app attached
+[6]Do we want to work with landscape or portrait orientation? or maybe both?
+both
+[7]What do you want to see in this app?
+smooth, simple functionality
+no clunky-ness
+[8]what are the pages we want in this app?
+Again, see visual layout of the app
+[9]what exactly are we trying to do?
+improve the experience of students at Puget Sound using 21st century technology
+learn android development through a highly practical and applied lense
+[10]what is the tour guide's app vision/mission statement?
+See 1, 7, and 9
+[11]add your own questions for us to answer and comments too for this app.
+Keep the user in mind when developing, simplicity is key to a successful app
+aka use the most tech-addled member of your family to test run features you made lol
