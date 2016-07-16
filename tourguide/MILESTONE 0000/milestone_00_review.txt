@@ -16,7 +16,7 @@ MILESTONE #0
 # review 
 # decent purpose -> needs edits + more effort in description
 
-# key words; provide, visitors, students, navigation, events, historial information, university of puget sound, campus, access, easy 
+# key words; provide, visitors, students, navigation, events, historcial information, university of puget sound, campus, access, easy 
 
 ===================
 [2] Features
