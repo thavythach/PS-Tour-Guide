@@ -42,5 +42,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng universityOfPugetSound = new LatLng(47.3, -122.5); // # issue 001: store coordinates in database
         mMap.addMarker(new MarkerOptions().position(universityOfPugetSound).title("UPS"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(universityOfPugetSound));
+
+
+
+        LatLng thompsonHall = new LatLng(47.263635, -122.4837498); // # issue 007: create a new LatLng Thompson obj
+        mMap.addMarker(new MarkerOptions().position(thompsonHall).title("Thompson Hall"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(thompsonHall));
     }
 }
