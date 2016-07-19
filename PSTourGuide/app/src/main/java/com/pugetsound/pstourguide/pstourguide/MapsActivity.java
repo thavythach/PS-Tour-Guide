@@ -38,11 +38,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng universityOfPugetSound = new LatLng(47.3, -122.5); // # issue 001: store coordinates in database
-        mMap.addMarker(new MarkerOptions().position(universityOfPugetSound).title("UPS"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(universityOfPugetSound));
-
         LatLng thompsonHall = new LatLng(47.263635, -122.4837498); // # issue 007: create a new LatLng Thompson obj
         mMap.addMarker(new MarkerOptions().position(thompsonHall).title("Thompson Hall"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(thompsonHall));
@@ -230,8 +225,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(bakerStadium));
 
         // TODO
-        LatLng oppenheimerCafe = new LatLng();
-        mMap.addMarker(new MarkerOptions().position(oppenheimerCafe).title("Oppenheimer Cafe"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(oppenheimerCafe));
+//        LatLng oppenheimerCafe = new LatLng();
+//        mMap.addMarker(new MarkerOptions().position(oppenheimerCafe).title("Oppenheimer Cafe"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(oppenheimerCafe));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(regesterHall, 16)); // Zoom Level 16 is optimal
     }
 }
