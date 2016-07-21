@@ -1,7 +1,15 @@
 package com.pugetsound.pstourguide.pstourguide;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,11 +26,70 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        permissions();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+
+    /** INSTANCE VARIABLES FOR PERMISSIONS**/
+    private Context context;
+    private Activity activity;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
+    /**
+     * Permissions
+     */
+    private void permissions(){
+        context = getApplicationContext(); // for ACCESS_FINE_LOCATION
+        activity = this; // for ACCESS_FINE_LOCATION
+
+        requestPermission();
+    }
+
+    /**
+     * check permissions
+     * @return
+     */
+    private boolean checkPermission(){
+        int result = ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION);
+        if (result == PackageManager.PERMISSION_GRANTED) return true;
+        else return false;
+    }
+
+    /**
+     * request permissions
+     */
+    private void requestPermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.ACCESS_FINE_LOCATION)){
+            Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(activity, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    /**
+     * request stuff
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(MapsActivity.this, R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MapsActivity.this, R.string.permission_denied, Toast.LENGTH_SHORT).show();
+                    // call lifecycle activity destroy here cause location is necessary # needs: team discussion
+                }
+                break;
+        }
+    }
+
 
 
     /**
