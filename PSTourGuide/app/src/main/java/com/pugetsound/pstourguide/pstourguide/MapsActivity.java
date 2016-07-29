@@ -17,10 +17,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<Location> mLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,197 +108,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng thompsonHall = new LatLng(47.263635, -122.4837498); // # issue 007: create a new LatLng Thompson obj
-        mMap.addMarker(new MarkerOptions().position(thompsonHall).title("Thompson Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(thompsonHall));
+        mLocations = new ArrayList<>();
 
-        LatLng fieldHouse = new LatLng(47.259795,-122.481175);
-        mMap.addMarker(new MarkerOptions().position(fieldHouse).title("Field House"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(fieldHouse));
+        mLocations.add(new Location("Regester Hall", 47.2619825,-122.4810598));
+        mLocations.add(new Location("Thompson Hall", 47.263635, -122.4837498));
+        mLocations.add(new Location("Field House", 47.259795, -122.481175));
+        mLocations.add(new Location("Weyerhauser Hall", 47.259795,-122.481175));
+        mLocations.add(new Location("Peyton Field", 47.2601056,-122.4826096));
+        mLocations.add(new Location("Lower Baker Field", 47.2612333,-122.4826033));
+        mLocations.add(new Location("Warner Hall", 47.261701,-122.4817124));
+        mLocations.add(new Location("Wyatt Hall", 47.2618819,-122.4823751));
+        mLocations.add(new Location("Todd Field", 47.2623233,-122.4816467));
+        mLocations.add(new Location("Seward Hall", 47.2620252,-122.4798254));
+        mLocations.add(new Location("Thomas hall", 47.2617864,-122.4797618));
+        mLocations.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
+        mLocations.add(new Location("Softball Field",47.2599231,-122.4805791));
+        mLocations.add(new Location("Todd-Phibbs Hall", 47.2626932,-122.4810082));
+        mLocations.add(new Location("Trimble", 47.2629495,-122.4804017));
+        mLocations.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
+        mLocations.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
+        mLocations.add(new Location("Howarth Hall", 47.263451,-122.4803902));
+        mLocations.add(new Location("Jones Hall", 47.2636632,-122.4808371));
+        mLocations.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
+        mLocations.add(new Location("The Cellar", 47.2628085,-122.4790297));
+        mLocations.add(new Location("Collins Library", 47.264242,-122.481759));
+        mLocations.add(new Location("Karlen Quad", 47.2638794,-122.481745));
+        mLocations.add(new Location("South Quad", 47.2624666,-122.4797446));
+        mLocations.add(new Location("Theme Row", 47.2609954,-122.4794028));
+        mLocations.add(new Location("Kittridge Hall", 47.2639602,-122.4791598));
+        mLocations.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
+        mLocations.add(new Location("Sculpture Studio", 47.2641136,-122.4785153));
+        mLocations.add(new Location("McIntyre Hall", 47.264193,-122.4805196));
+        mLocations.add(new Location("President's House", 47.2654854,-122.4829989));
+        mLocations.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
+        mLocations.add(new Location("Alcorn Aboretum", 47.264778,-122.482382));
+        mLocations.add(new Location("Smith Hall", 47.2644341,-122.4798282));
+        mLocations.add(new Location("Oppenheimer Hall", 47.264429,-122.4809467));
+        mLocations.add(new Location("Anderson/Langdon Hall",47.2648607,-122.4806463));
+        mLocations.add(new Location("Harrington Hall", 47.2651619,-122.4808149));
+        mLocations.add(new Location("Schiff Hall", 47.2651129,-122.480116));
+        mLocations.add(new Location("Kilworth Chapel", 47.2653789,-122.4817543));
+        mLocations.add(new Location("Expeditionary", 47.2639838,-122.4778462));
+        mLocations.add(new Location("Security Services", 47.2633136,-122.4778425));
+        mLocations.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
+        mLocations.add(new Location("Out Hause", 47.2605833,-122.4794021));
+        mLocations.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
+        mLocations.add(new Location("Residential Life", 47.2636512,-122.4782423));
+        mLocations.add(new Location("Bike Shop", 47.2641155,-122.4782371));
+        mLocations.add(new Location("Baker Stadium", 47.2600233,-122.4825617));
 
-        LatLng weyerhaeuserHall = new LatLng(47.259795,-122.481175);
-        mMap.addMarker(new MarkerOptions().position(weyerhaeuserHall).title("Weyerhaeuser Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(weyerhaeuserHall));
+        for (int i=0; i < mLocations.size(); i++){
+            // mLocations.add(new Location(databaseTable.location_name, databaseTable.latitude, databaseTable.longitude)); // needs database logic
+            mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(mLocations.get(i).getLatLng()));
+        }
 
-        // peyton field aka baker stadium
-        LatLng peytonField = new LatLng(47.2601056,-122.4826096);
-        mMap.addMarker(new MarkerOptions().position(peytonField).title("Peyton Field"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(peytonField));
-
-        LatLng lowerBakerField = new LatLng(47.2612333,-122.4826033);
-        mMap.addMarker(new MarkerOptions().position(lowerBakerField).title("Lower Baker Field"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(lowerBakerField));
-
-        LatLng warnerHall = new LatLng(47.261701,-122.4817124);
-        mMap.addMarker(new MarkerOptions().position(warnerHall).title("Warner Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(warnerHall));
-
-        LatLng wyattHall = new LatLng(47.2618819,-122.4823751);
-        mMap.addMarker(new MarkerOptions().position(wyattHall).title("Wyatt Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(wyattHall));
-
-        LatLng toddField = new LatLng(47.2623233,-122.4816467);
-        mMap.addMarker(new MarkerOptions().position(toddField).title("Todd Field"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(toddField));
-
-        LatLng sewardHall = new LatLng(47.2620252,-122.4798254);
-        mMap.addMarker(new MarkerOptions().position(sewardHall).title("Seward Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sewardHall));
-
-        LatLng regesterHall = new LatLng(47.2619825,-122.4810598);
-        mMap.addMarker(new MarkerOptions().position(regesterHall).title("Regester Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(regesterHall));
-
-        // RIP Commencement
-        LatLng thomasHall = new LatLng(47.2617864,-122.4797618);
-        mMap.addMarker(new MarkerOptions().position(thomasHall).title("Thomas Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(thomasHall));
-
-        LatLng basballDiamond = new LatLng(47.2593788,-122.4829743);
-        mMap.addMarker(new MarkerOptions().position(basballDiamond).title("Baseball Diamond"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(basballDiamond));
-
-        LatLng softballField = new LatLng(47.2599231,-122.4805791);
-        mMap.addMarker(new MarkerOptions().position(softballField).title("Softball Field"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(softballField));
-
-        LatLng toddPhibbs = new LatLng(47.2626932,-122.4810082);
-        mMap.addMarker(new MarkerOptions().position(toddPhibbs).title("Todd/Phibbs Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(toddPhibbs));
-
-        LatLng trimble = new LatLng(47.2629495,-122.4804017);
-        mMap.addMarker(new MarkerOptions().position(trimble).title("Trimble Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(trimble));
-
-        LatLng jonesFountain = new LatLng(47.2636877,-122.4802265);
-        mMap.addMarker(new MarkerOptions().position(jonesFountain).title("Jones Fountain"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(jonesFountain));
-
-        LatLng diversionsCafe = new LatLng(47.2634335,-122.4789625);
-        mMap.addMarker(new MarkerOptions().position(diversionsCafe).title("Diversions Cafe"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(diversionsCafe));
-
-        LatLng howarthHall = new LatLng(47.263451,-122.4803902);
-        mMap.addMarker(new MarkerOptions().position(howarthHall).title("Howarth Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(howarthHall));
-
-        LatLng jonesHall = new LatLng(47.2636632,-122.4808371);
-        mMap.addMarker(new MarkerOptions().position(jonesHall).title("Jones Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(jonesHall));
-
-        LatLng wheelockStudentCenter = new LatLng(47.2631483,-122.4792851);
-        mMap.addMarker(new MarkerOptions().position(wheelockStudentCenter).title("Wheelock Student Center"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(wheelockStudentCenter));
-
-        LatLng theCellar = new LatLng(47.2628085,-122.4790297);
-        mMap.addMarker(new MarkerOptions().position(theCellar).title("The Cellar"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(theCellar));
-
-        LatLng collinsLibrary = new LatLng(47.264242,-122.481759);
-        mMap.addMarker(new MarkerOptions().position(collinsLibrary).title("Collin's Library"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(collinsLibrary));
-
-        LatLng karlenQuad = new LatLng(47.2638794,-122.481745);
-        mMap.addMarker(new MarkerOptions().position(karlenQuad).title("Karlen Quad"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(karlenQuad));
-
-        LatLng southQuad = new LatLng(47.2624666,-122.4797446);
-        mMap.addMarker(new MarkerOptions().position(southQuad).title("South Quad"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(southQuad));
-
-        LatLng themeRow = new LatLng(47.2609954,-122.4794028);
-        mMap.addMarker(new MarkerOptions().position(themeRow).title("Theme Row"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(themeRow));
-
-        LatLng kittredgeHall = new LatLng(47.2639602,-122.4791598);
-        mMap.addMarker(new MarkerOptions().position(kittredgeHall).title("Kittredge Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kittredgeHall));
-
-        LatLng ceramicStudio = new LatLng(47.2642912,-122.4792128);
-        mMap.addMarker(new MarkerOptions().position(ceramicStudio).title("Ceramic's Studio"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(ceramicStudio));
-
-        LatLng sculptureStudio = new LatLng(47.2641136,-122.4785153);
-        mMap.addMarker(new MarkerOptions().position(sculptureStudio).title("Sculpture Studio"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sculptureStudio));
-
-        LatLng mcintyreHall = new LatLng(47.264193,-122.4805196);
-        mMap.addMarker(new MarkerOptions().position(mcintyreHall).title("McIntyre Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mcintyreHall));
-
-        LatLng presidentsHouse = new LatLng(47.2654854,-122.4829989);
-        mMap.addMarker(new MarkerOptions().position(presidentsHouse).title("President's House"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(presidentsHouse));
-
-        LatLng schneebeckConcertHall = new LatLng(47.2636322,-122.4821299);
-        mMap.addMarker(new MarkerOptions().position(schneebeckConcertHall).title("Schneebeck Concert Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(schneebeckConcertHall));
-
-        LatLng alcornArboretum = new LatLng(47.264778,-122.482382);
-        mMap.addMarker(new MarkerOptions().position(alcornArboretum).title("Alcorn Arboretum"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(alcornArboretum));
-
-        LatLng smithHall = new LatLng(47.2644341,-122.4798282);
-        mMap.addMarker(new MarkerOptions().position(smithHall).title("Smith Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(smithHall));
-
-        LatLng oppenheimerHall = new LatLng(47.264429,-122.4809467);
-        mMap.addMarker(new MarkerOptions().position(oppenheimerHall).title("Oppenheimer Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(oppenheimerHall));
-
-        LatLng andersonLangdonHall = new LatLng(47.2648607,-122.4806463);
-        mMap.addMarker(new MarkerOptions().position(andersonLangdonHall).title("Anderson / Langdon Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(andersonLangdonHall));
-
-        LatLng harringtonHall = new LatLng(47.2651619,-122.4808149);
-        mMap.addMarker(new MarkerOptions().position(harringtonHall).title("Harrington Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(harringtonHall));
-
-        LatLng schiffHall = new LatLng(47.2651129,-122.480116);
-        mMap.addMarker(new MarkerOptions().position(schiffHall).title("Schiff Hall"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(schiffHall));
-
-        LatLng kilworthChapel = new LatLng(47.2653789,-122.4817543);
-        mMap.addMarker(new MarkerOptions().position(kilworthChapel).title("Kilworth Chapel"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kilworthChapel));
-
-        LatLng expeditionary = new LatLng(47.2639838,-122.4778462);
-        mMap.addMarker(new MarkerOptions().position(expeditionary).title("Expeditionary"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(expeditionary));
-
-        LatLng securityServices = new LatLng(47.2633136,-122.4778425);
-        mMap.addMarker(new MarkerOptions().position(securityServices).title("Security Services"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(securityServices));
-
-        LatLng printCopyServices = new LatLng(47.2627185,-122.4782137);
-        mMap.addMarker(new MarkerOptions().position(printCopyServices).title("Print and Copy Services"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(printCopyServices));
-
-        LatLng outHaus = new LatLng(47.2605833,-122.4794021);
-        mMap.addMarker(new MarkerOptions().position(outHaus).title("Out Haus"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(outHaus));
-
-        LatLng studentDiversityCenter = new LatLng(47.2636513,-122.4785338);
-        mMap.addMarker(new MarkerOptions().position(studentDiversityCenter).title("Student Diversity Center"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(studentDiversityCenter));
-
-        LatLng resLife = new LatLng(47.2636512,-122.4782423);
-        mMap.addMarker(new MarkerOptions().position(resLife).title("Student Activities / Res. Life"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(resLife));
-
-        LatLng bikeShop = new LatLng(47.2641155,-122.4782371);
-        mMap.addMarker(new MarkerOptions().position(bikeShop).title("Bicycle Mechanic Shop"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(bikeShop));
-
-        LatLng bakerStadium = new LatLng(47.2600233,-122.4825617);
-        mMap.addMarker(new MarkerOptions().position(bakerStadium).title("Baker Stadium"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(bakerStadium));
 
         // TODO
-//        LatLng oppenheimerCafe = new LatLng();
+//        Location oppenheimerCafe = new Location();
 //        mMap.addMarker(new MarkerOptions().position(oppenheimerCafe).title("Oppenheimer Cafe"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(oppenheimerCafe));
+//        mMap.moveCamera(CameraUpdateFactory.newLocation(oppenheimerCafe));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(regesterHall, 16)); // Zoom Level 16 is optimal
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mLocations.get(0).getLatLng(), 16)); // Zoom Level 16 is optimal
     }
 }
