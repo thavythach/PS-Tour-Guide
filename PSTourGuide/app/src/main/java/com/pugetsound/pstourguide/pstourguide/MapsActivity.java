@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,9 +160,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         for (int i=0; i < mLocations.size(); i++){
             // mLocations.add(new Location(databaseTable.location_name, databaseTable.latitude, databaseTable.longitude)); // needs database logic
-            mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()));
+            Marker info = mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()).snippet(mLocations.get(i).getLatLng().toString()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(mLocations.get(i).getLatLng()));
+            info.showInfoWindow(); // this only needs to be ran once... so optimization it needs lol
         }
+
 
 
         // TODO
