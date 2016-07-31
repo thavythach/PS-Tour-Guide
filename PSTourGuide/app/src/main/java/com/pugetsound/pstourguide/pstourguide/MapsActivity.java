@@ -3,28 +3,33 @@ package com.pugetsound.pstourguide.pstourguide;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.design.widget.Snackbar;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private List<Location> mLocations;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,97 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        // get the listview
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+
+        // preparing list data
+        prepareListData();
+
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
+        // Listview on child click listener
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        listDataHeader.get(groupPosition)
+                                + " : "
+                                + listDataChild.get(
+                                listDataHeader.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT)
+                        .show();
+                return false;
+            }
+        });
+
+        // Listview Group expanded listener
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getApplicationContext(),
+                        listDataHeader.get(groupPosition) + " Expanded",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Listview Group collasped listener
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getApplicationContext(),
+                        listDataHeader.get(groupPosition) + " Collapsed",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
+
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Residence Halls");
+        listDataHeader.add("Food and Beverage");
+        listDataHeader.add("Music and Art");
+
+        // Adding child data
+        List<String> residenceHalls = new ArrayList<String>();
+        residenceHalls.add("Anderson/Langdon");
+        residenceHalls.add("Harrington");
+        residenceHalls.add("Oppenheimer");
+        residenceHalls.add("Regester");
+        residenceHalls.add("Schiff");
+        residenceHalls.add("Seward");
+        residenceHalls.add("Todd/Phibbs");
+        residenceHalls.add("Thomas");
+        residenceHalls.add("Tribble");
+
+        List<String> foodBev = new ArrayList<String>();
+        foodBev.add("The SUB");
+        foodBev.add("The Cellar");
+        foodBev.add("Diversions Cafe");
+        foodBev.add("Oppenheimer Cafe");
+
+        List<String> musicArt = new ArrayList<String>();
+        musicArt.add("Kilworth Chapel");
+        musicArt.add("Schneebeck Hall");
+        musicArt.add("Collins Memorial Library");
+
+        listDataChild.put(listDataHeader.get(0), residenceHalls); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), foodBev);
+        listDataChild.put(listDataHeader.get(2), musicArt);
+    }
+
 
 
     /** INSTANCE VARIABLES FOR PERMISSIONS**/
@@ -161,7 +256,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         for (int i=0; i < mLocations.size(); i++){
             // mLocations.add(new Location(databaseTable.location_name, databaseTable.latitude, databaseTable.longitude)); // needs database logic
-            Marker info = mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()).snippet(mLocations.get(i).getLatLng().toString()));
+            Marker info = mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()).snippet(mLocations.get(i).getLatLng().toString()) .visible(false));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(mLocations.get(i).getLatLng()));
             info.showInfoWindow(); // this only needs to be ran once... so optimization it needs lol
         }
