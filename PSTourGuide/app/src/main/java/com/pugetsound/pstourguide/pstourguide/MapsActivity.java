@@ -124,7 +124,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocations.add(new Location("Thomas hall", 47.2617864,-122.4797618));
         mLocations.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
         mLocations.add(new Location("Softball Field",47.2599231,-122.4805791));
-        mLocations.add(new Location("Todd-Phibbs Hall", 47.2626932,-122.4810082));
+        mLocations.add(new Location("Todd-Phibbs Hall North Entrance", 47.2626932,-122.4810082));
+        mLocations.add(new Location("Todd-Phibbs Hall South Entrance", 47.262107, -122.481038));
         mLocations.add(new Location("Trimble", 47.2629495,-122.4804017));
         mLocations.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
         mLocations.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
