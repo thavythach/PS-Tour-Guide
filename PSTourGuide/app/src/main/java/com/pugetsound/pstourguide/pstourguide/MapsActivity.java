@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -125,22 +126,46 @@ static {
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
             if (groupPosition==0) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(mresidenceHalls.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(mresidenceHalls.get(childPosition).getLatLng())
+                        .title(mresidenceHalls.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                );
             }
             if (groupPosition==1) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(mfoodBev.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(mfoodBev.get(childPosition).getLatLng())
+                        .title(mfoodBev.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                );
             }
             if (groupPosition==2) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(mmusicArt.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(mmusicArt.get(childPosition).getLatLng())
+                        .title(mmusicArt.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                );
             }
             if (groupPosition==3) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(mservices.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(mservices.get(childPosition).getLatLng())
+                        .title(mservices.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                );
             }
             if (groupPosition==4) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(mclassRooms.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(mclassRooms.get(childPosition).getLatLng())
+                        .title(mclassRooms.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                );
             }
             if (groupPosition==5) {
-                Marker info = mMap.addMarker(new MarkerOptions().position(msportsRec.get(childPosition).getLatLng()));
+                Marker info = mMap.addMarker(new MarkerOptions()
+                        .position(msportsRec.get(childPosition).getLatLng())
+                        .title(msportsRec.get(childPosition).getLocationName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                );
             }
              return true;
             }
