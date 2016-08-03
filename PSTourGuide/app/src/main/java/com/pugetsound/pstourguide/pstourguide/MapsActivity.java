@@ -10,16 +10,14 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +29,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static ArrayList<Location> msportsRec = new ArrayList<>();
     private static ArrayList<Location> mclassRooms = new ArrayList<>();
     private static ArrayList<Location> mservices = new ArrayList<>();
-
     // im setting up the location variables into arrays sorted by building use
+    // when we add locations we can do them all up here, the list creates itself based on
+    // these arrays
     static {
 
         mfoodBev.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
         mfoodBev.add(new Location("The Cellar", 47.2628085,-122.4790297));
         mfoodBev.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
+        mfoodBev.add(new Location("Oppenheimer Cafe", 47.263533, -122.483203));
 
         mmusicArt.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
         mmusicArt.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
@@ -88,13 +88,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mservices.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
         mservices.add(new Location("Residential Life", 47.2636512,-122.4782423));
     }
+    //map variables
     private GoogleMap mMap;
     private Location mUPS=new Location("University of Puget Sound", 47.262328, -122.481645);
-    //private List<Location> mLocations;
+    private List<Location> mLocations;
+
+    //expandable list variables (arraylists in static block are these, too)
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    //something
+    private UiSettings mUiSettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,24 +108,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         permissions();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
         // preparing list data
         prepareListData();
-
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
+        // Listview on child click listener
+        // when a location is selected, a marker is added there and the camera moves to the marker
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //sets markers for residence halls'
@@ -182,7 +184,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         // Listview Group expanded listener
-        // this closes previous groups when you open other groups
+        // this closes previous group when you open other group
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int lastExpandedGroupPosition=0;
             @Override
@@ -195,8 +197,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         // Listview Group collasped listener
+        // this just makes a toast for now
+        //do change
         expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
             @Override
             public void onGroupCollapse(int groupPosition) {
                 Toast.makeText(getApplicationContext(),
@@ -207,11 +210,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    //this prepares the list of data for the expandable menu
+    //called in startup before making menus
     private void prepareListData() {
+        //contains names of the groups
         listDataHeader = new ArrayList<String>();
+        //will contain name of group and items in the group
         listDataChild = new HashMap<String, List<String>>();
 
-        // Adding child data
+        // Adding group name data
         listDataHeader.add("Residence Halls");
         listDataHeader.add("Food and Beverage");
         listDataHeader.add("Music and Art");
@@ -250,6 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (int i = 0; i<mservices.size(); i++) {
             services.add(mservices.get(i).getLocationName());
         }
+        //making the data for the menu
         listDataChild.put(listDataHeader.get(0), residenceHalls); // Header, Child data
         listDataChild.put(listDataHeader.get(1), foodBev);
         listDataChild.put(listDataHeader.get(2), musicArt);
@@ -330,71 +338,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //make the camera move to campus
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mUPS.getLatLng(), 16));
-        //mLocations = new ArrayList<>();
 
-        //mLocations.add(new Location("Regester Hall", 47.2619825,-122.4810598));
-        //mLocations.add(new Location("Thompson Hall", 47.263635, -122.4837498));
-        //mLocations.add(new Location("Field House", 47.259795, -122.481175));
-        //mLocations.add(new Location("Weyerhauser Hall", 47.259795,-122.481175));
-        //mLocations.add(new Location("Peyton Field", 47.2601056,-122.4826096));
-        //mLocations.add(new Location("Lower Baker Field", 47.2612333,-122.4826033));
-        //mLocations.add(new Location("Warner Hall", 47.261701,-122.4817124));
-        //mLocations.add(new Location("Wyatt Hall", 47.2618819,-122.4823751));
-        //mLocations.add(new Location("Todd Field", 47.2623233,-122.4816467));
-        //mLocations.add(new Location("Seward Hall", 47.2620252,-122.4798254));
-        //mLocations.add(new Location("Thomas hall", 47.2617864,-122.4797618));
-        //mLocations.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
-        //mLocations.add(new Location("Softball Field",47.2599231,-122.4805791));
-        //mLocations.add(new Location("Todd-Phibbs Hall North Entrance", 47.2626932,-122.4810082));
-        //mLocations.add(new Location("Todd-Phibbs Hall South Entrance", 47.262107, -122.481038));
-        //mLocations.add(new Location("Trimble", 47.2629495,-122.4804017));
-        //mLocations.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
-        //mLocations.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
-        //mLocations.add(new Location("Howarth Hall", 47.263451,-122.4803902));
-        //mLocations.add(new Location("Jones Hall", 47.2636632,-122.4808371));
-        //mLocations.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
-        //mLocations.add(new Location("The Cellar", 47.2628085,-122.4790297));
-        //mLocations.add(new Location("Collins Library", 47.264242,-122.481759));
-        //mLocations.add(new Location("Karlen Quad", 47.2638794,-122.481745));
-        //mLocations.add(new Location("South Quad", 47.2624666,-122.4797446));
-        //mLocations.add(new Location("Theme Row", 47.2609954,-122.4794028));
-        //mLocations.add(new Location("Kittridge Hall", 47.2639602,-122.4791598));
-        //mLocations.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
-        //mLocations.add(new Location("Sculpture Studio", 47.2641136,-122.4785153));
-        //mLocations.add(new Location("McIntyre Hall", 47.264193,-122.4805196));
-        //mLocations.add(new Location("President's House", 47.2654854,-122.4829989));
-        //mLocations.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
-        //mLocations.add(new Location("Alcorn Aboretum", 47.264778,-122.482382));
-        //mLocations.add(new Location("Smith Hall", 47.2644341,-122.4798282));
-        //mLocations.add(new Location("Oppenheimer Hall", 47.264429,-122.4809467));
-        //mLocations.add(new Location("Anderson/Langdon Hall",47.2648607,-122.4806463));
-        //mLocations.add(new Location("Harrington Hall", 47.2651619,-122.4808149));
-        //mLocations.add(new Location("Schiff Hall", 47.2651129,-122.480116));
-        //mLocations.add(new Location("Kilworth Chapel", 47.2653789,-122.4817543));
-        //mLocations.add(new Location("Expeditionary", 47.2639838,-122.4778462));
-        //mLocations.add(new Location("Security Services", 47.2633136,-122.4778425));
-        //mLocations.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
-        //mLocations.add(new Location("Out Hause", 47.2605833,-122.4794021));
-        //mLocations.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
-        //mLocations.add(new Location("Residential Life", 47.2636512,-122.4782423));
-        //mLocations.add(new Location("Bike Shop", 47.2641155,-122.4782371));
-        //mLocations.add(new Location("Baker Stadium", 47.2600233,-122.4825617));
+        //enable ui controls
+        //right now just zoom controls
+        mUiSettings = mMap.getUiSettings();
+        mUiSettings.setZoomControlsEnabled(true);
 
-        //for (int i=0; i < mLocations.size(); i++){
-            // mLocations.add(new Location(databaseTable.location_name, databaseTable.latitude, databaseTable.longitude)); // needs database logic
-          //  Marker info = mMap.addMarker(new MarkerOptions().position(mLocations.get(i).getLatLng()).title(mLocations.get(i).getLocationName()).snippet(mLocations.get(i).getLatLng().toString()) .visible(false));
-            //mMap.moveCamera(CameraUpdateFactory.newLatLng(mLocations.get(i).getLatLng()));
-            //info.showInfoWindow(); // this only needs to be ran once... so optimization it needs lol
-        //}
+        mLocations = new ArrayList<>();
 
-
-
-        // TODO
-//        Location oppenheimerCafe = new Location();
-//        mMap.addMarker(new MarkerOptions().position(oppenheimerCafe).title("Oppenheimer Cafe"));
-//        mMap.moveCamera(CameraUpdateFactory.newLocation(oppenheimerCafe));
-
-       // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mLocations.get(0).getLatLng(), 16)); // Zoom Level 16 is optimal
+        mLocations.add(new Location("Regester Hall", 47.2619825,-122.4810598));
+        mLocations.add(new Location("Thompson Hall", 47.263635, -122.4837498));
+        mLocations.add(new Location("Field House", 47.259795, -122.481175));
+        mLocations.add(new Location("Weyerhauser Hall", 47.259795,-122.481175));
+        mLocations.add(new Location("Peyton Field", 47.2601056,-122.4826096));
+        mLocations.add(new Location("Lower Baker Field", 47.2612333,-122.4826033));
+        mLocations.add(new Location("Warner Hall", 47.261701,-122.4817124));
+        mLocations.add(new Location("Wyatt Hall", 47.2618819,-122.4823751));
+        mLocations.add(new Location("Todd Field", 47.2623233,-122.4816467));
+        mLocations.add(new Location("Seward Hall", 47.2620252,-122.4798254));
+        mLocations.add(new Location("Thomas hall", 47.2617864,-122.4797618));
+        mLocations.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
+        mLocations.add(new Location("Softball Field",47.2599231,-122.4805791));
+        mLocations.add(new Location("Todd-Phibbs Hall North Entrance", 47.2626932,-122.4810082));
+        mLocations.add(new Location("Todd-Phibbs Hall South Entrance", 47.262107, -122.481038));
+        mLocations.add(new Location("Trimble", 47.2629495,-122.4804017));
+        mLocations.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
+        mLocations.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
+        mLocations.add(new Location("Howarth Hall", 47.263451,-122.4803902));
+        mLocations.add(new Location("Jones Hall", 47.2636632,-122.4808371));
+        mLocations.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
+        mLocations.add(new Location("The Cellar", 47.2628085,-122.4790297));
+        mLocations.add(new Location("Collins Library", 47.264242,-122.481759));
+        mLocations.add(new Location("Karlen Quad", 47.2638794,-122.481745));
+        mLocations.add(new Location("South Quad", 47.2624666,-122.4797446));
+        mLocations.add(new Location("Theme Row", 47.2609954,-122.4794028));
+        mLocations.add(new Location("Kittridge Hall", 47.2639602,-122.4791598));
+        mLocations.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
+        mLocations.add(new Location("Sculpture Studio", 47.2641136,-122.4785153));
+        mLocations.add(new Location("McIntyre Hall", 47.264193,-122.4805196));
+        mLocations.add(new Location("President's House", 47.2654854,-122.4829989));
+        mLocations.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
+        mLocations.add(new Location("Alcorn Aboretum", 47.264778,-122.482382));
+        mLocations.add(new Location("Smith Hall", 47.2644341,-122.4798282));
+        mLocations.add(new Location("Oppenheimer Hall", 47.264429,-122.4809467));
+        mLocations.add(new Location("Anderson/Langdon Hall",47.2648607,-122.4806463));
+        mLocations.add(new Location("Harrington Hall", 47.2651619,-122.4808149));
+        mLocations.add(new Location("Schiff Hall", 47.2651129,-122.480116));
+        mLocations.add(new Location("Kilworth Chapel", 47.2653789,-122.4817543));
+        mLocations.add(new Location("Expeditionary", 47.2639838,-122.4778462));
+        mLocations.add(new Location("Security Services", 47.2633136,-122.4778425));
+        mLocations.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
+        mLocations.add(new Location("Out Hause", 47.2605833,-122.4794021));
+        mLocations.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
+        mLocations.add(new Location("Residential Life", 47.2636512,-122.4782423));
+        mLocations.add(new Location("Bike Shop", 47.2641155,-122.4782371));
+        mLocations.add(new Location("Baker Stadium", 47.2600233,-122.4825617));
     }
 }
