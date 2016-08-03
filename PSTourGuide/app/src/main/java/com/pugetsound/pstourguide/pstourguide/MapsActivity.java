@@ -124,6 +124,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                //first maybe we should only have 1 marker up at a time?
+                //a counter could be added to set a 'limit' on markers up at once but.. meh
+                mMap.clear();
                 //sets markers for residence halls'
                 //THESE COULD BE UN HARD CODED BUT IM LAZY -jesse
                 if (groupPosition==0) {
