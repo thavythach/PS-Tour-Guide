@@ -33,65 +33,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static ArrayList<Location> mservices = new ArrayList<>();
 
     // im setting up the location variables into arrays sorted by building use
-static {
-// makin the arraylists
+    static {
 
+        mfoodBev.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
+        mfoodBev.add(new Location("The Cellar", 47.2628085,-122.4790297));
+        mfoodBev.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
 
-    mfoodBev.add(new Location("Diversions Cafe", 47.2634335,-122.4789625));
-    mfoodBev.add(new Location("The Cellar", 47.2628085,-122.4790297));
-    mfoodBev.add(new Location("Wheelock Student Center", 47.2631483,-122.4792851));
+        mmusicArt.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
+        mmusicArt.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
+        mmusicArt.add(new Location("Collins Library", 47.264242,-122.481759));
+        mmusicArt.add(new Location("Kittridge Hall", 47.2639602,-122.4791598));
+        mmusicArt.add(new Location("Sculpture Studio", 47.2641136,-122.4785153));
+        mmusicArt.add(new Location("Kilworth Chapel", 47.2653789,-122.4817543));
 
-    mmusicArt.add(new Location("Schneebeck Concert Hall", 47.2636322,-122.4821299));
-    mmusicArt.add(new Location("Ceramic Studio", 47.2642912,-122.4792128));
-    mmusicArt.add(new Location("Collins Library", 47.264242,-122.481759));
-    mmusicArt.add(new Location("Kittridge Hall", 47.2639602,-122.4791598));
-    mmusicArt.add(new Location("Sculpture Studio", 47.2641136,-122.4785153));
-    mmusicArt.add(new Location("Kilworth Chapel", 47.2653789,-122.4817543));
+        mresidenceHalls.add(new Location("Oppenheimer Hall", 47.264429,-122.4809467));
+        mresidenceHalls.add(new Location("Anderson/Langdon Hall",47.2648607,-122.4806463));
+        mresidenceHalls.add(new Location("Harrington Hall", 47.2651619,-122.4808149));
+        mresidenceHalls.add(new Location("Schiff Hall", 47.2651129,-122.480116));
+        mresidenceHalls.add(new Location("Out Hause", 47.2605833,-122.4794021));
+        mresidenceHalls.add(new Location("Regester Hall", 47.2619825,-122.4810598));
+        mresidenceHalls.add(new Location("Seward Hall", 47.2620252,-122.4798254));
+        mresidenceHalls.add(new Location("Thomas hall", 47.2617864,-122.4797618));
+        mresidenceHalls.add(new Location("Todd-Phibbs Hall North Entrance", 47.2626932,-122.4810082));
+        mresidenceHalls.add(new Location("Todd-Phibbs Hall South Entrance", 47.262107, -122.481038));
+        mresidenceHalls.add(new Location("Trimble", 47.2629495,-122.4804017));
+        mresidenceHalls.add(new Location("Theme Row", 47.2609954,-122.4794028));
 
-    mresidenceHalls.add(new Location("Oppenheimer Hall", 47.264429,-122.4809467));
-    mresidenceHalls.add(new Location("Anderson/Langdon Hall",47.2648607,-122.4806463));
-    mresidenceHalls.add(new Location("Harrington Hall", 47.2651619,-122.4808149));
-    mresidenceHalls.add(new Location("Schiff Hall", 47.2651129,-122.480116));
-    mresidenceHalls.add(new Location("Out Hause", 47.2605833,-122.4794021));
-    mresidenceHalls.add(new Location("Regester Hall", 47.2619825,-122.4810598));
-    mresidenceHalls.add(new Location("Seward Hall", 47.2620252,-122.4798254));
-    mresidenceHalls.add(new Location("Thomas hall", 47.2617864,-122.4797618));
-    mresidenceHalls.add(new Location("Todd-Phibbs Hall North Entrance", 47.2626932,-122.4810082));
-    mresidenceHalls.add(new Location("Todd-Phibbs Hall South Entrance", 47.262107, -122.481038));
-    mresidenceHalls.add(new Location("Trimble", 47.2629495,-122.4804017));
-    mresidenceHalls.add(new Location("Theme Row", 47.2609954,-122.4794028));
+        msportsRec.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
+        msportsRec.add(new Location("Softball Field",47.2599231,-122.4805791));
+        msportsRec.add(new Location("Alcorn Aboretum", 47.264778,-122.482382));
+        msportsRec.add(new Location("Bike Shop", 47.2641155,-122.4782371));
+        msportsRec.add(new Location("Field House", 47.259795, -122.481175));
+        msportsRec.add(new Location("Peyton Field", 47.2601056,-122.4826096));
+        msportsRec.add(new Location("Lower Baker Field", 47.2612333,-122.4826033));
+        msportsRec.add(new Location("Todd Field", 47.2623233,-122.4816467));
+        msportsRec.add(new Location("Expeditionary", 47.2639838,-122.4778462));
+        msportsRec.add(new Location("Baker Stadium", 47.2600233,-122.4825617));
+        msportsRec.add(new Location("Karlen Quad", 47.2638794,-122.481745));
+        msportsRec.add(new Location("South Quad", 47.2624666,-122.4797446));
+        msportsRec.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
 
-    msportsRec.add(new Location("Baseball Diamond", 47.2593788,-122.4829743));
-    msportsRec.add(new Location("Softball Field",47.2599231,-122.4805791));
-    msportsRec.add(new Location("Alcorn Aboretum", 47.264778,-122.482382));
-    msportsRec.add(new Location("Bike Shop", 47.2641155,-122.4782371));
-    msportsRec.add(new Location("Field House", 47.259795, -122.481175));
-    msportsRec.add(new Location("Peyton Field", 47.2601056,-122.4826096));
-    msportsRec.add(new Location("Lower Baker Field", 47.2612333,-122.4826033));
-    msportsRec.add(new Location("Todd Field", 47.2623233,-122.4816467));
-    msportsRec.add(new Location("Expeditionary", 47.2639838,-122.4778462));
-    msportsRec.add(new Location("Baker Stadium", 47.2600233,-122.4825617));
-    msportsRec.add(new Location("Karlen Quad", 47.2638794,-122.481745));
-    msportsRec.add(new Location("South Quad", 47.2624666,-122.4797446));
-    msportsRec.add(new Location("Jones Fountain", 47.2636877,-122.4802265));
+        mclassRooms.add(new Location("Smith Hall", 47.2644341,-122.4798282));
+        mclassRooms.add(new Location("Weyerhauser Hall", 47.259795,-122.481175));
+        mclassRooms.add(new Location("Thompson Hall", 47.263635, -122.4837498));
+        mclassRooms.add(new Location("Howarth Hall", 47.263451,-122.4803902));
+        mclassRooms.add(new Location("Jones Hall", 47.2636632,-122.4808371));
+        mclassRooms.add(new Location("Warner Hall", 47.261701,-122.4817124));
+        mclassRooms.add(new Location("Wyatt Hall", 47.2618819,-122.4823751));
+        mclassRooms.add(new Location("McIntyre Hall", 47.264193,-122.4805196));
 
-    mclassRooms.add(new Location("Smith Hall", 47.2644341,-122.4798282));
-    mclassRooms.add(new Location("Weyerhauser Hall", 47.259795,-122.481175));
-    mclassRooms.add(new Location("Thompson Hall", 47.263635, -122.4837498));
-    mclassRooms.add(new Location("Howarth Hall", 47.263451,-122.4803902));
-    mclassRooms.add(new Location("Jones Hall", 47.2636632,-122.4808371));
-    mclassRooms.add(new Location("Warner Hall", 47.261701,-122.4817124));
-    mclassRooms.add(new Location("Wyatt Hall", 47.2618819,-122.4823751));
-    mclassRooms.add(new Location("McIntyre Hall", 47.264193,-122.4805196));
-
-    mservices.add(new Location("Security Services", 47.2633136,-122.4778425));
-    mservices.add(new Location("President's House", 47.2654854,-122.4829989));
-    mservices.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
-    mservices.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
-    mservices.add(new Location("Residential Life", 47.2636512,-122.4782423));
-
+        mservices.add(new Location("Security Services", 47.2633136,-122.4778425));
+        mservices.add(new Location("President's House", 47.2654854,-122.4829989));
+        mservices.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
+        mservices.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
+        mservices.add(new Location("Residential Life", 47.2636512,-122.4782423));
     }
     private GoogleMap mMap;
+    private Location mUPS=new Location("University of Puget Sound", 47.262328, -122.481645);
     //private List<Location> mLocations;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -123,62 +121,76 @@ static {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-            if (groupPosition==0) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                //sets markers for residence halls'
+                //THESE COULD BE UN HARD CODED BUT IM LAZY -jesse
+                if (groupPosition==0) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(mresidenceHalls.get(childPosition).getLatLng())
                         .title(mresidenceHalls.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
-                );
-            }
-            if (groupPosition==1) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+                    );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mresidenceHalls.get(childPosition).getLatLng()));
+                }
+                //sets makers for food and beverage places
+                if (groupPosition==1) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(mfoodBev.get(childPosition).getLatLng())
                         .title(mfoodBev.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                );
-            }
-            if (groupPosition==2) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+                    );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mfoodBev.get(childPosition).getLatLng()));
+                }
+                //sets markers for music and art places
+                if (groupPosition==2) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(mmusicArt.get(childPosition).getLatLng())
                         .title(mmusicArt.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                );
-            }
-            if (groupPosition==3) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+                    );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mmusicArt.get(childPosition).getLatLng()));
+                }
+                //sets markers for service buildings
+                if (groupPosition==3) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(mservices.get(childPosition).getLatLng())
                         .title(mservices.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-                );
-            }
-            if (groupPosition==4) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+                     );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mservices.get(childPosition).getLatLng()));
+                }
+                //sets markers for buildings with classrooms
+                if (groupPosition==4) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(mclassRooms.get(childPosition).getLatLng())
                         .title(mclassRooms.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                );
-            }
-            if (groupPosition==5) {
-                Marker info = mMap.addMarker(new MarkerOptions()
+                    );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mclassRooms.get(childPosition).getLatLng()));
+                }
+                //sets markers for sports and recreation buildings
+                if (groupPosition==5) {
+                    Marker info = mMap.addMarker(new MarkerOptions()
                         .position(msportsRec.get(childPosition).getLatLng())
                         .title(msportsRec.get(childPosition).getLocationName())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                );
-            }
+                    );
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(msportsRec.get(childPosition).getLatLng()));
+                }
              return true;
             }
         });
 
         // Listview Group expanded listener
+        // this closes previous groups when you open other groups
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
+            int lastExpandedGroupPosition=0;
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
+                if(groupPosition != lastExpandedGroupPosition){
+                    expListView.collapseGroup(lastExpandedGroupPosition);
+                }
+                lastExpandedGroupPosition = groupPosition;
             }
         });
 
@@ -318,7 +330,7 @@ static {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mUPS.getLatLng(), 16));
         //mLocations = new ArrayList<>();
 
         //mLocations.add(new Location("Regester Hall", 47.2619825,-122.4810598));
