@@ -6,7 +6,7 @@ A tour guide application.
 
 ### Authors
 
-* Thavy Thach [Lead Programmer]
+* Thavy Thach [Lead Programmer/Project Lead]
 * Jesse Kuras [Lead Programmer/the sketch]
 * Jake Redmond [Lead Programmer]
 * Alexander Harris [Lead Programmer]
@@ -52,6 +52,8 @@ A tour guide application.
 ### November Goals
 * release-2.0.0 -> November 19th, 2016
 * Hits google play store. 
+
+---------------------------------------------
 
 ### Funny Note by Thavy Thach
 
