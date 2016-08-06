@@ -15,44 +15,43 @@ A tour guide application.
 
 * Git/Github 
 * Getting started on Pugetsound Unbound App
+* Android Development
 
-### Experiences wanted?
+### June Goals
 
-* `Github` / Version Control
-* `Android Development` / Java Programming
-* `Complex Problem Solving` / Horizontal Flip, Vertical Flip Algorithms
-* `IOS Development` / Swift Programming
-* `Web Development` / Javascript, HTML, CSS, PHP, etc.
-* `Technology Practices` / Frontend development, backend development
-* `Python` / Programming languages
-* `Compensation` / Market, business, and audience
-* `Reach` / target audience
-* `Division of labor` / ?
-* `plan of attack`/ ?
+* Git/Github 
+* Getting started on Pugetsound Unbound App
+* Android Development
 
-### Things to note about Tour Guide App
+### July Goals
 
-* Free
-* Pictures of dorms
-* Lists of places in the area
-* Huge marketing and advertising
-* Funding from local businesses?
-* Location-based 
-* Weather
-* Maps
-* Website accessibilitiy ---> Platform
-* Events specification
-* Departmenet specification
-* Birds eye view if android platform
-* Historical Information
-* Jesse (the sketch) knows a guy in the music department with drones --> aerial photos?
-* Campus Map -> fastest route to the sub or food in a truck?
-* Continunity in the future
-* Sub Menu
-* Numbers
-* Separate maps - Direction (start and end) vs Main (clicking the buildings)
-* Login system?
-	*Maybe for a general forum board inside the app
+* Git/Github 
+* Milestones 0,1,2,3
+* Official Start of Creation of App.
+* Android Development
+
+### August Goals
+
+* Database Integration
+* Interface + major activities
+* release-0.0.1 -> August 6th, 2016
+* release-0.1.0 -> August 7th, 2016
+* release-0.2.0 -> August 13th, 2016
+* release-0.3.0 -> August 20th, 2016
+* release-0.4.0 -> August 27th, 2016 
+
+### September Goals
+
+* release-0.5.0 -> September 3rd, 2016
+* release-1.0.0 -> September 30th, 2016
+
+### October Goals 
+
+* release-1.1.0 -> October 31st, 2016
+
+### November Goals
+* release-2.0.0 -> November 19th, 2016
+* Hits google play store. 
 
 ### Funny Note by Thavy Thach
 
