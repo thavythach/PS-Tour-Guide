@@ -19,6 +19,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static ArrayList<Location> msportsRec = new ArrayList<>();
     private static ArrayList<Location> mclassRooms = new ArrayList<>();
     private static ArrayList<Location> mservices = new ArrayList<>();
+    private static ArrayList<ArrayList<Location>> mbuildings = new ArrayList<>();
     // im setting up the location variables into arrays sorted by building use
     // when we add locations we can do them all up here, the list creates itself based on
     // these arrays
@@ -87,6 +89,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mservices.add(new Location("Print & Copy Services", 47.2627185,-122.4782137));
         mservices.add(new Location("Student Diversity Center", 47.2636513,-122.4785338));
         mservices.add(new Location("Residential Life", 47.2636512,-122.4782423));
+
+        mbuildings.add(mresidenceHalls);
+        mbuildings.add(mfoodBev);
+        mbuildings.add(mmusicArt);
+        mbuildings.add(mservices);
+        mbuildings.add(mclassRooms);
+        mbuildings.add(msportsRec);
     }
     //map variables
     private GoogleMap mMap;
@@ -120,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         expListView.setAdapter(listAdapter);
 
         // Listview on child click listener
-        // when a location is selected, a marker is added there and the camera moves to the marker
+        // when a location is selected, a marker is added there
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -129,59 +138,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
                 //sets markers for residence halls'
                 //THESE COULD BE UN HARD CODED BUT IM LAZY -jesse
-                if (groupPosition==0) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mresidenceHalls.get(childPosition).getLatLng())
-                        .title(mresidenceHalls.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
-                    );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mresidenceHalls.get(childPosition).getLatLng()));
-                }
-                //sets makers for food and beverage places
-                if (groupPosition==1) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mfoodBev.get(childPosition).getLatLng())
-                        .title(mfoodBev.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                    );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mfoodBev.get(childPosition).getLatLng()));
-                }
-                //sets markers for music and art places
-                if (groupPosition==2) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mmusicArt.get(childPosition).getLatLng())
-                        .title(mmusicArt.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                    );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mmusicArt.get(childPosition).getLatLng()));
-                }
-                //sets markers for service buildings
-                if (groupPosition==3) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mservices.get(childPosition).getLatLng())
-                        .title(mservices.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-                     );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mservices.get(childPosition).getLatLng()));
-                }
-                //sets markers for buildings with classrooms
-                if (groupPosition==4) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mclassRooms.get(childPosition).getLatLng())
-                        .title(mclassRooms.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                    );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mclassRooms.get(childPosition).getLatLng()));
-                }
-                //sets markers for sports and recreation buildings
-                if (groupPosition==5) {
-                    Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(msportsRec.get(childPosition).getLatLng())
-                        .title(msportsRec.get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                    );
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(msportsRec.get(childPosition).getLatLng()));
-                }
+                Marker info = mMap.addMarker(new MarkerOptions()
+                    .position(mbuildings.get(groupPosition).get(childPosition).getLatLng())
+                    .title(mbuildings.get(groupPosition).get(childPosition).getLocationName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                );
              return true;
             }
         });
@@ -227,45 +188,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //will contain name of group and items in the group
         listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        //residence halls fill
-        List<String> residenceHalls = new ArrayList<String>();
-        for (int i = 0; i<mresidenceHalls.size(); i++) {
-            residenceHalls.add(mresidenceHalls.get(i).getLocationName());
-        }
-        //food and beverage fill
-        List<String> foodBev = new ArrayList<String>();
-        for (int i = 0; i<mfoodBev.size(); i++) {
-            foodBev.add(mfoodBev.get(i).getLocationName());
-        }
-        //music and art fill
-        List<String> musicArt = new ArrayList<String>();
-        for (int i = 0; i<mmusicArt.size(); i++) {
-            musicArt.add(mmusicArt.get(i).getLocationName());
-        }
-        //sports and rec fill
-        List<String> sportsRec = new ArrayList<>();
-        for (int i = 0; i<msportsRec.size(); i++) {
-            sportsRec.add(msportsRec.get(i).getLocationName());
-        }
-        //classrooms fill
-        List<String> classRooms = new ArrayList<>();
-        for (int i = 0; i<mclassRooms.size(); i++) {
-            classRooms.add(mclassRooms.get(i).getLocationName());
-        }
-        //services fill
-        List<String> services = new ArrayList<>();
-        for (int i = 0; i<mservices.size(); i++) {
-            services.add(mservices.get(i).getLocationName());
+        //temp
+        ArrayList<List<String>> listChildren=new ArrayList<List<String>>();
+        //go through mbuildings to fill dis
+        for (int l=0; l<mbuildings.size(); l++) {
+                listChildren.add( new ArrayList<String>() );
+                for (int i = 0; i<mbuildings.get(l).size(); i++) {
+                    listChildren.get(l).add(mbuildings.get(l).get(i).getLocationName());
+            }
         }
         //making the data for the menu
-        listDataChild.put(listDataHeader.get(0), residenceHalls); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), foodBev);
-        listDataChild.put(listDataHeader.get(2), musicArt);
-        listDataChild.put(listDataHeader.get(3), services);
-        listDataChild.put(listDataHeader.get(4), classRooms);
-        listDataChild.put(listDataHeader.get(5), sportsRec);
+        //listdataheader.get(x) is the name of the group
+        //the list<string> is the stuff in the group
+        for(int i=0;i<mbuildings.size(); i++) {
+            listDataChild.put(listDataHeader.get(i), listChildren.get(i)); // Header, Child data
+        }
     }
 
 
@@ -291,8 +228,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private boolean checkPermission(){
         int result = ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION);
-        if (result == PackageManager.PERMISSION_GRANTED) return true;
-        else return false;
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -300,7 +236,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private void requestPermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+           // Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_REQUEST_CODE);
         }
