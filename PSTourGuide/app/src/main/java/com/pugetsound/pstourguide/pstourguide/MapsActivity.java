@@ -108,7 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Location mUPS=new Location("University of Puget Sound", 47.262328, -122.481645);
     private List<Location> mLocations;
-
+    private boolean isPoppedUp = false;
 
     //expandable list variables (arraylists in static block are these, too)
     ExpandableListAdapter listAdapter;
@@ -162,69 +162,76 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //this is the on click for the expandable menu from the toolbar
     public void toolbarMapMenuClick(View v) {
-        LinearLayout explistLayout = (LinearLayout) findViewById(R.id.exp_list);
-        if (explistLayout == null) {
-            RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.map_activity);
-            View mapMenu = getLayoutInflater().inflate(R.layout.explist, myLayout, false);
-            myLayout.addView(mapMenu);
+        if (isPoppedUp==false) {
+            LinearLayout explistLayout = (LinearLayout) findViewById(R.id.exp_list);
+            if (explistLayout == null) {
+                RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.map_activity);
+                View mapMenu = getLayoutInflater().inflate(R.layout.explist, myLayout, false);
+                myLayout.addView(mapMenu);
+
+                // get the listview
+                expListView = (ExpandableListView) findViewById(R.id.lvExp);
+                // preparing list data
+                prepareListData();
+                listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+                // setting list adapter
+                expListView.setAdapter(listAdapter);
+                // Listview on child click listener
+                // when a location is selected, a marker is added there
+                expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                        //first maybe we should only have 1 marker up at a time?
+                        //a counter could be added to set a 'limit' on markers up at once but.. meh
+                        mMap.clear();
+                        //sets markers for residence halls'
+                        //THESE COULD BE UN HARD CODED BUT IM LAZY -jesse
+                        Marker info = mMap.addMarker(new MarkerOptions()
+                                .position(mbuildings.get(groupPosition).get(childPosition).getLatLng())
+                                .title(mbuildings.get(groupPosition).get(childPosition).getLocationName())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                        );
+                        return true;
+                    }
+                });
+
+                // Listview Group expanded listener
+                // this closes previous group when you open other group
+                expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                    int lastExpandedGroupPosition = 0;
+
+                    @Override
+                    public void onGroupExpand(int groupPosition) {
+                        if (groupPosition != lastExpandedGroupPosition) {
+                            expListView.collapseGroup(lastExpandedGroupPosition);
+                        }
+                        lastExpandedGroupPosition = groupPosition;
+                    }
+                });
+
+                // Listview Group collasped listener
+                // this just makes a toast for now
+                //do change
+                expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+                    @Override
+                    public void onGroupCollapse(int groupPosition) {
+                        Toast.makeText(getApplicationContext(),
+                                listDataHeader.get(groupPosition) + " Collapsed",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+            isPoppedUp=true;
         }
-        if (explistLayout != null) {
+
+        else {
             View myView = findViewById(R.id.exp_list);
             ViewGroup parent = (ViewGroup) myView.getParent();
             parent.removeView(myView);
+            isPoppedUp=false;
         }
 
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-        // preparing list data
-        prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-        // Listview on child click listener
-        // when a location is selected, a marker is added there
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                //first maybe we should only have 1 marker up at a time?
-                //a counter could be added to set a 'limit' on markers up at once but.. meh
-                mMap.clear();
-                //sets markers for residence halls'
-                //THESE COULD BE UN HARD CODED BUT IM LAZY -jesse
-                Marker info = mMap.addMarker(new MarkerOptions()
-                        .position(mbuildings.get(groupPosition).get(childPosition).getLatLng())
-                        .title(mbuildings.get(groupPosition).get(childPosition).getLocationName())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
-                );
-                return true;
-            }
-        });
-
-        // Listview Group expanded listener
-        // this closes previous group when you open other group
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int lastExpandedGroupPosition=0;
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                if(groupPosition != lastExpandedGroupPosition){
-                    expListView.collapseGroup(lastExpandedGroupPosition);
-                }
-                lastExpandedGroupPosition = groupPosition;
-            }
-        });
-
-        // Listview Group collasped listener
-        // this just makes a toast for now
-        //do change
-        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
     /** INSTANCE VARIABLES FOR PERMISSIONS**/
