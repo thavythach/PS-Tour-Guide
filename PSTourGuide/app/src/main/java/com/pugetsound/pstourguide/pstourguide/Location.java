@@ -14,14 +14,20 @@ public class Location {
     private double mLatitude;
     private double mLongitude;
     private LatLng mLatLng;
+    private int mClassification;
 
-    public Location(String mLocationName, double mLatitude, double mLongitude){
+    public int getClassification() {
+        return mClassification;
+    }
+
+    public Location(String mLocationName, double mLatitude, double mLongitude, int mClassification){
         mId = UUID.randomUUID();
 
         this.mLocationName = mLocationName;
         this.mLatitude = mLatitude;
         this.mLongitude = mLongitude;
         this.mLatLng = new LatLng(mLatitude, mLongitude);
+        this.mClassification = mClassification; // 0 1 2 3 4 5
     }
 
     public LatLng getLatLng() {
