@@ -46,10 +46,10 @@ public class Grid_Menu extends AppCompatActivity {
                     //Intent intent = new Intent(Grid_Menu.this, UNKNOWN_ACTIVITY.class);
                     //startActivity(intent);
                 }
-                //not sure whats next, but thats okay
+                //goes to the red dot page, currently in place 4  in the menu
                 if (position==4) {
-                    //Intent intent = new Intent(Grid_Menu.this, UKNOWN_ACTIVITY.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(Grid_Menu.this, RedDotActivity.class);
+                    startActivity(intent);
                 }
                 //sees opportunities slide away every day, dead inside
                 if (position==5) {
